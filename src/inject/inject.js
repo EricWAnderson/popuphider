@@ -2,7 +2,7 @@
 chrome.extension.sendMessage({}, function(response) {
 	// Run popup removal when page has completed
 	var readyStateCheckInterval = setInterval(function() {
-		if (document.readyState === "complete") {
+		if (document.readyState === "interactive") {
 			clearInterval(readyStateCheckInterval);
 			
 			STPopupRemover.remove();
@@ -17,6 +17,7 @@ var STPopupRemover = (function() {
 
 		// Make page scrollable, in case CSS doesn't override
 		document.querySelector(".ReactModal__Body--open").style.position = 'relative';
+	  	document.querySelector("body").style.overflow = 'auto';
 	}
 	
   // Exposed functions
